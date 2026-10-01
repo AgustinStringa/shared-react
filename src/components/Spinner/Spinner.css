@@ -1,0 +1,178 @@
+/* Base variables for Spinner customization */
+:root {
+  --shared-spinner-color: #3b82f6;
+  --shared-spinner-track-color: rgba(59, 130, 246, 0.2);
+}
+
+.shared-spinner-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.shared-spinner-text {
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: currentColor;
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   Variant 1: Ring (Default Modern Smooth Dual Ring)
+   ========================================================================== */
+.shared-spinner-ring {
+  box-sizing: border-box;
+  display: inline-block;
+  border-style: solid;
+  border-radius: 50%;
+  border-top-color: var(--shared-spinner-color, #3b82f6);
+  border-right-color: var(--shared-spinner-track-color, rgba(59, 130, 246, 0.2));
+  border-bottom-color: var(--shared-spinner-track-color, rgba(59, 130, 246, 0.2));
+  border-left-color: var(--shared-spinner-track-color, rgba(59, 130, 246, 0.2));
+  animation: shared-spin 0.8s linear infinite;
+}
+
+/* Sizes */
+.shared-spinner-sm {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.shared-spinner-md {
+  width: 40px;
+  height: 40px;
+  border-width: 4px;
+}
+
+.shared-spinner-lg {
+  width: 64px;
+  height: 64px;
+  border-width: 5px;
+}
+
+@keyframes shared-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Variant 2: Image Spinner
+   ========================================================================== */
+.shared-spinner-img {
+  object-fit: contain;
+  display: inline-block;
+}
+
+.shared-spinner-img-spin {
+  animation: shared-spin 2s linear infinite;
+}
+
+.shared-spinner-img-pulse {
+  animation: shared-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes shared-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+}
+
+/* ==========================================================================
+   Variant 3: Chase Dots (Cotizador Style)
+   ========================================================================== */
+.shared-sk-chase {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  animation: shared-sk-chase 2.5s infinite linear both;
+}
+
+.shared-sk-chase-dot {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: shared-sk-chase-dot 2s infinite ease-in-out both;
+}
+
+.shared-sk-chase-dot:before {
+  content: "";
+  display: block;
+  width: 25%;
+  height: 25%;
+  background-color: var(--shared-spinner-color, #3b82f6);
+  border-radius: 100%;
+  animation: shared-sk-chase-dot-before 2s infinite ease-in-out both;
+}
+
+.shared-sk-chase-dot:nth-child(1) { animation-delay: -1.1s; }
+.shared-sk-chase-dot:nth-child(2) { animation-delay: -1s; }
+.shared-sk-chase-dot:nth-child(3) { animation-delay: -0.9s; }
+.shared-sk-chase-dot:nth-child(4) { animation-delay: -0.8s; }
+.shared-sk-chase-dot:nth-child(5) { animation-delay: -0.7s; }
+.shared-sk-chase-dot:nth-child(6) { animation-delay: -0.6s; }
+
+.shared-sk-chase-dot:nth-child(1):before { animation-delay: -1.1s; }
+.shared-sk-chase-dot:nth-child(2):before { animation-delay: -1s; }
+.shared-sk-chase-dot:nth-child(3):before { animation-delay: -0.9s; }
+.shared-sk-chase-dot:nth-child(4):before { animation-delay: -0.8s; }
+.shared-sk-chase-dot:nth-child(5):before { animation-delay: -0.7s; }
+.shared-sk-chase-dot:nth-child(6):before { animation-delay: -0.6s; }
+
+@keyframes shared-sk-chase {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes shared-sk-chase-dot {
+  80%, 100% { transform: rotate(360deg); }
+}
+
+@keyframes shared-sk-chase-dot-before {
+  50% { transform: scale(0.4); }
+  100%, 0% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   Variant 4: Cubes (cotizador-cripto Style)
+   ========================================================================== */
+.shared-sk-cubes {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.shared-sk-cube1,
+.shared-sk-cube2 {
+  background-color: var(--shared-spinner-color, #3b82f6);
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: shared-sk-cubemove 1.8s infinite ease-in-out;
+}
+
+.shared-sk-cube2 {
+  animation-delay: -0.9s;
+}
+
+@keyframes shared-sk-cubemove {
+  25% { transform: translateX(30px) rotate(-90deg) scale(0.5); }
+  50% { transform: translateX(30px) translateY(30px) rotate(-179deg); }
+  50.1% { transform: translateX(30px) translateY(30px) rotate(-180deg); }
+  75% { transform: translateX(0px) translateY(30px) rotate(-270deg) scale(0.5); }
+  100% { transform: rotate(-360deg); }
+}
