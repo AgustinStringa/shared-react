@@ -64,5 +64,6 @@ export const createStorageService = (key, defaultValue = []) => {
     get: () => getItem(key, defaultValue),
     save: (data) => setItem(key, data),
     clear: () => removeItem(key),
+    clearAll: clearStorage,
   };
 };
