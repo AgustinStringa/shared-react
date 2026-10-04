@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import { getCurrentYear } from "../../utils/dateUtils.js";
 
 const DEFAULT_LINKS = [
   {
@@ -44,7 +45,7 @@ export const Footer = ({
   className = "",
   children,
 }) => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = getCurrentYear();
   const defaultCopyright = `© ${currentYear} ${title}. Todos los derechos reservados.`;
   const themeClass = `shared-footer-${variant}`;
 
