@@ -3,7 +3,6 @@ import "./Header.css";
 
 const DEFAULT_NAV_LINKS = [
   { label: "Inicio", href: "#!" },
-  { label: "Proyectos", href: "#!" },
 ];
 
 /**
@@ -72,9 +71,8 @@ export const Header = ({
                         href={link.href || "#!"}
                         target={link.target}
                         rel={link.target === "_blank" ? "noreferrer" : undefined}
-                        className={`shared-header-nav-link ${
-                          link.active ? "active" : ""
-                        }`}
+                        className={`shared-header-nav-link ${link.active ? "active" : ""
+                          }`}
                         onClick={(e) => handleLinkClick(link, e)}
                       >
                         {link.label}
@@ -116,9 +114,8 @@ export const Header = ({
                   href={link.href || "#!"}
                   target={link.target}
                   rel={link.target === "_blank" ? "noreferrer" : undefined}
-                  className={`shared-header-nav-link ${
-                    link.active ? "active" : ""
-                  }`}
+                  className={`shared-header-nav-link ${link.active ? "active" : ""
+                    }`}
                   onClick={(e) => handleLinkClick(link, e)}
                 >
                   {link.label}
