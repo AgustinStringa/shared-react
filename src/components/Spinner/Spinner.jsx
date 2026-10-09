@@ -27,9 +27,9 @@ export const Spinner = ({
   // Inline style override if a custom color is passed
   const customColorStyle = color
     ? {
-        "--shared-spinner-color": color,
-        "--shared-spinner-track-color": `${color}33`,
-      }
+      "--shared-spinner-color": color,
+      "--shared-spinner-track-color": `${color}33`,
+    }
     : {};
 
   const sizeClass = `shared-spinner-${size}`;
@@ -41,8 +41,8 @@ export const Spinner = ({
         imageAnimation === "spin"
           ? "shared-spinner-img-spin"
           : imageAnimation === "pulse"
-          ? "shared-spinner-img-pulse"
-          : "";
+            ? "shared-spinner-img-pulse"
+            : "";
 
       return (
         <img
@@ -56,7 +56,7 @@ export const Spinner = ({
     switch (variant) {
       case "chase":
         return (
-          <div className="shared-sk-chase">
+          <div className={`shared-sk-chase ${sizeClass}`}>
             <div className="shared-sk-chase-dot" />
             <div className="shared-sk-chase-dot" />
             <div className="shared-sk-chase-dot" />
@@ -68,7 +68,7 @@ export const Spinner = ({
 
       case "cubes":
         return (
-          <div className="shared-sk-cubes">
+          <div className={`shared-sk-cubes ${sizeClass}`}>
             <div className="shared-sk-cube1" />
             <div className="shared-sk-cube2" />
           </div>
