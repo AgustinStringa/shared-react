@@ -5,3 +5,4 @@ export * from "./context/LoadingContext.jsx";
 export * from "./components/Layout/Header.jsx";
 export * from "./components/Layout/Footer.jsx";
 export * from "./utils/dateUtils.js";
+export * from "./api/httpClient.js";
