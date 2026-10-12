@@ -1,26 +1,12 @@
 /* ==========================================================================
-   Footer Base Styles & Variants
+   Footer Base Styles & Dynamic Theme
    ========================================================================== */
 .shared-footer {
   width: 100%;
   padding: 2.5rem 1.5rem 1.5rem;
   margin-top: auto;
-}
-
-/* Theme Variants */
-.shared-footer-teal {
-  background-color: #00796b;
-  color: #ffffff;
-}
-
-.shared-footer-dark {
-  background-color: #111827;
-  color: #f3f4f6;
-}
-
-.shared-footer-slate {
-  background-color: #1e293b;
-  color: #f1f5f9;
+  background-color: var(--shared-footer-bg, #1e293b);
+  color: var(--shared-footer-text, #f1f5f9);
 }
 
 /* Container & Grid Layout */
@@ -37,13 +23,14 @@
   font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  color: var(--shared-footer-text, #ffffff);
 }
 
 .shared-footer-description {
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.6;
-  opacity: 0.9;
+  color: var(--shared-footer-muted, #94a3b8);
   max-width: 500px;
 }
 
@@ -51,6 +38,7 @@
   margin: 0 0 0.8rem;
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--shared-footer-text, #ffffff);
 }
 
 .shared-footer-links-list {
@@ -63,16 +51,15 @@
 }
 
 .shared-footer-link {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--shared-footer-muted, rgba(255, 255, 255, 0.85));
   text-decoration: none;
   font-size: 0.95rem;
-  transition: opacity 0.2s ease, text-decoration 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .shared-footer-link:hover {
-  opacity: 1;
+  color: var(--shared-footer-accent, #ffffff);
   text-decoration: underline;
-  color: #ffffff;
 }
 
 /* Bottom Copyright Bar */
@@ -80,18 +67,18 @@
   max-width: 1200px;
   margin: 2rem auto 0;
   padding-top: 1.2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid var(--shared-footer-border, rgba(255, 255, 255, 0.15));
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
   font-size: 0.88rem;
-  opacity: 0.85;
+  color: var(--shared-footer-muted, #94a3b8);
 }
 
 .shared-footer-author-link {
-  color: inherit;
+  color: var(--shared-footer-accent, inherit);
   font-weight: 600;
   text-decoration: none;
 }

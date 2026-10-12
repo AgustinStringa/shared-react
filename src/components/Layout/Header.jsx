@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import "./Header.css";
+import { resolveTheme } from "../../theme/themes.js";
 
 const DEFAULT_NAV_LINKS = [
   { label: "Inicio", href: "#!" },
 ];
 
 /**
- * Reusable Header component with responsive hamburger menu.
+ * Reusable Header component with responsive hamburger menu and dynamic theme system.
  *
  * @param {Object} props
  * @param {string|React.ReactNode} [props.title="React App"] - Brand title/name.
  * @param {string|React.ReactNode} [props.logo] - Brand logo image URL or SVG node.
  * @param {Array<{label: string, href: string, onClick?: Function, active?: boolean, target?: string}>} [props.navLinks] - Navigation items.
  * @param {React.ReactNode} [props.actions] - Right-hand side action elements (buttons, toggles).
- * @param {'teal'|'dark'|'primary'|'slate'} [props.variant="teal"] - Color variant theme.
+ * @param {string|Object} [props.theme="slate"] - Theme preset name or theme object.
  * @param {string} [props.className=""] - Extra CSS class.
  * @param {React.ReactNode} [props.children] - Custom content overriding/extending default navbar.
  */
@@ -22,7 +23,7 @@ export const Header = ({
   logo,
   navLinks = DEFAULT_NAV_LINKS,
   actions,
-  variant = "teal",
+  theme = "slate",
   className = "",
   children,
 }) => {
@@ -39,10 +40,20 @@ export const Header = ({
     setIsMenuOpen(false);
   };
 
-  const themeClass = `shared-header-${variant}`;
+  const resolvedTheme = resolveTheme(theme);
+  const themeStyles = {
+    "--shared-header-bg": resolvedTheme.primary,
+    "--shared-header-bg-gradient": `linear-gradient(135deg, ${resolvedTheme.primary}, ${resolvedTheme.primaryDark || resolvedTheme.primary})`,
+    "--shared-header-text": resolvedTheme.text || "#ffffff",
+    "--shared-header-accent": resolvedTheme.accent || "#38bdf8",
+    "--shared-header-border": resolvedTheme.border || "rgba(255, 255, 255, 0.12)",
+  };
 
   return (
-    <header className={`shared-header ${themeClass} ${className}`}>
+    <header
+      style={themeStyles}
+      className={`shared-header ${className}`}
+    >
       <div className="shared-header-container">
         {/* Brand Area */}
         <a href="#!" className="shared-header-brand">
@@ -71,8 +82,7 @@ export const Header = ({
                         href={link.href || "#!"}
                         target={link.target}
                         rel={link.target === "_blank" ? "noreferrer" : undefined}
-                        className={`shared-header-nav-link ${link.active ? "active" : ""
-                          }`}
+                        className={`shared-header-nav-link ${link.active ? "active" : ""}`}
                         onClick={(e) => handleLinkClick(link, e)}
                       >
                         {link.label}
@@ -114,8 +124,7 @@ export const Header = ({
                   href={link.href || "#!"}
                   target={link.target}
                   rel={link.target === "_blank" ? "noreferrer" : undefined}
-                  className={`shared-header-nav-link ${link.active ? "active" : ""
-                    }`}
+                  className={`shared-header-nav-link ${link.active ? "active" : ""}`}
                   onClick={(e) => handleLinkClick(link, e)}
                 >
                   {link.label}

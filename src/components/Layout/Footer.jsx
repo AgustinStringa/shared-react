@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import { getCurrentYear } from "../../utils/dateUtils.js";
+import { resolveTheme } from "../../theme/themes.js";
 
 const DEFAULT_LINKS = [
   {
@@ -21,7 +22,7 @@ const DEFAULT_AUTHOR = {
 };
 
 /**
- * Reusable Footer component for shared library.
+ * Reusable Footer component for shared library with dynamic theme system.
  *
  * @param {Object} props
  * @param {string|React.ReactNode} [props.title="React Workspace"] - Footer title or app name.
@@ -30,7 +31,7 @@ const DEFAULT_AUTHOR = {
  * @param {Array<{label: string, href: string, target?: string}>} [props.links=[]] - Additional or custom links.
  * @param {boolean} [props.includeDefaultLinks=true] - Whether to include default personal links (GitHub, LinkedIn).
  * @param {string} [props.copyright] - Custom copyright line.
- * @param {'teal'|'dark'|'slate'} [props.variant="teal"] - Color variant theme.
+ * @param {string|Object} [props.theme="slate"] - Theme preset name or theme object.
  * @param {string} [props.className=""] - Extra CSS class.
  * @param {React.ReactNode} [props.children] - Custom content overriding default layout.
  */
@@ -41,20 +42,31 @@ export const Footer = ({
   links = [],
   includeDefaultLinks = true,
   copyright,
-  variant = "teal",
+  theme = "slate",
   className = "",
   children,
 }) => {
   const currentYear = getCurrentYear();
   const defaultCopyright = `© ${currentYear} ${title}. Todos los derechos reservados.`;
-  const themeClass = `shared-footer-${variant}`;
+
+  const resolvedTheme = resolveTheme(theme);
+  const themeStyles = {
+    "--shared-footer-bg": resolvedTheme.primaryDark || resolvedTheme.primary,
+    "--shared-footer-text": resolvedTheme.text || "#f1f5f9",
+    "--shared-footer-muted": resolvedTheme.textMuted || "#94a3b8",
+    "--shared-footer-accent": resolvedTheme.accent || "#38bdf8",
+    "--shared-footer-border": resolvedTheme.border || "rgba(255, 255, 255, 0.12)",
+  };
 
   const finalLinks = includeDefaultLinks
     ? [...links, ...DEFAULT_LINKS]
     : links;
 
   return (
-    <footer className={`shared-footer ${themeClass} ${className}`}>
+    <footer
+      style={themeStyles}
+      className={`shared-footer ${className}`}
+    >
       {children || (
         <>
           <div className="shared-footer-container">
